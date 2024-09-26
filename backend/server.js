@@ -1,12 +1,11 @@
 import express from "express";
 const app = express();
-const port = 3000;
+dotenv.config();
 
+const port = process.env.PORT || 3000;
 import dotenv from "dotenv";
 import { connectDb } from "./db-connection.js";
 import productRoutes from "./routes/productRoutes.js";
-
-dotenv.config();
 
 //middleware
 
@@ -25,5 +24,5 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   connectDb();
-  console.log(`App is running on port: ${port}`);
+  console.log(`App is running on http://localhost:${port}`);
 });
