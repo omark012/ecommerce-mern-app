@@ -14,26 +14,29 @@ export const getProducts = async (req, res) => {
 
 //Create new Product and save to DB
 export const createProduct = async (req, res) => {
-  const { fullname, price, image } = req.body;
-  if (!fullname || !price || !image) {
-    console.log(req.body);
-    return res
-      .status(400)
-      .json({ success: false, message: "Please provide all the fields" });
+  const { name, price, image } = req.body;
+  if (!name || !price || !image) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide all the fields[BE]",
+    });
   }
 
   try {
     const newProduct = await Product.create({
-      fullname,
+      name,
       price,
       image,
     });
-    res.status(201).json({ success: true, data: newProduct });
+    res.status(201).json({ success: true, data: `${newProduct}` });
   } catch (error) {
-    console.error("Error while creating new product:", error.message);
+    console.error("[BE] Error while creating new product:", error.message);
     res
       .status(500)
-      .json({ success: false, message: "Error while creating new product" });
+      .json({
+        success: false,
+        message: "[BE]Error while creating new product",
+      });
   }
 };
 

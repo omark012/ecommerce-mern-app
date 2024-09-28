@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // middleware for product routes
-app.use("/api/product", productRoutes);
+app.use("/product", productRoutes);
 
 //Default api
 app.get("/", (req, res) => {
