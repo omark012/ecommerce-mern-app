@@ -34,12 +34,33 @@ const useProductStore = create((set) => ({
     const data = await res.json();
     console.log(data.message);
     if (data.success) {
-      //updating the state,which re-renders the component and refresh the page
+      //when we update the state,it immediately updates the UI without the need of refresh page
       set((prevState) => ({
         products: prevState.products.filter((product) => product._id !== id),
       }));
       return data;
     }
+  },
+  updateProduct: async (id, updatedProduct) => {
+    const res = await fetch(`/api/product/edit/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+    const data = await res.json();
+    if (!data.success) {
+      return data;
+    }
+
+    //when we update the state,it immediately updates the UI without the need of refresh page
+    set((prevState) => ({
+      products: prevState.products.map((product) =>
+        product._id === id ? data.data : product
+      ),
+    }));
+    return data;
   },
 }));
 

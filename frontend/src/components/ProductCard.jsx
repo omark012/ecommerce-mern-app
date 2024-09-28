@@ -19,17 +19,48 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useProductStore from "../store/product";
 
 const ProductCard = ({ product }) => {
-  const { deleteProduct } = useProductStore();
+  const { deleteProduct, updateProduct } = useProductStore();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [updatedProduct, setUpdatedProduct] = useState(product);
 
   const handleDelete = async (id) => {
     const response = await deleteProduct(id);
+    if (!response.success) {
+      toast({
+        title: "Error",
+        description: response.message,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: response.message,
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedProduct((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateForm = async (id) => {
+    const response = await updateProduct(id, updatedProduct);
+    onClose();
     if (!response.success) {
       toast({
         title: "Error",
@@ -93,28 +124,32 @@ const ProductCard = ({ product }) => {
               <Input
                 type="text"
                 placeholder="Product Name"
-                // value={newProduct.name}
-                // onChange={(e) => handleChange(e)}
-                // name="name"
+                value={updatedProduct.name}
+                onChange={(e) => handleChange(e)}
+                name="name"
               />
               <Input
                 type="number"
                 placeholder="Product Price"
-                // value={newProduct.price}
-                // onChange={(e) => handleChange(e)}
-                // name="price"
+                value={updatedProduct.price}
+                onChange={(e) => handleChange(e)}
+                name="price"
               />
               <Input
                 type="text"
                 placeholder="Product Image Url"
-                // value={newProduct.image}
-                // onChange={(e) => handleChange(e)}
-                // name="image"
+                value={updatedProduct.image}
+                onChange={(e) => handleChange(e)}
+                name="image"
               />
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button
+              onClick={() => handleUpdateForm(product._id)}
+              colorScheme="blue"
+              mr={3}
+            >
               Update
             </Button>
             <Button onClick={onClose}>Cancel</Button>
