@@ -10,7 +10,6 @@ const HomePage = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  console.log(products);
 
   return (
     <Container maxW={"1180px"} p={5} marginTop={10}>
@@ -48,7 +47,7 @@ const HomePage = () => {
         )}
       </VStack>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} w={"full"}>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={10} w={"full"}>
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

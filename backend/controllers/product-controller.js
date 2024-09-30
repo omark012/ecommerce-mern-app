@@ -8,7 +8,9 @@ export const getProducts = async (req, res) => {
     res.status(200).json({ success: true, data: products });
   } catch (error) {
     console.log(`Error while fetching products ${error.message}`);
-    res.status(500).json({ success: false, message: "server error" });
+    res
+      .status(500)
+      .json({ success: false, message: "server error while fetching" });
   }
 };
 
@@ -30,7 +32,6 @@ export const createProduct = async (req, res) => {
     });
     res.status(201).json({ success: true, data: `${newProduct}` });
   } catch (error) {
-    console.error("[BE] Error while creating new product:", error.message);
     res.status(500).json({
       success: false,
       message: "[BE]Error while creating new product",
@@ -50,13 +51,11 @@ export const updateProduct = async (req, res) => {
     const updatedProduct = await Product.findByIdAndUpdate(id, product, {
       new: true,
     });
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Product Updated Successfully",
-        data: updatedProduct,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Product Updated Successfully",
+      data: updatedProduct,
+    });
   } catch (error) {
     console.log("Cannot update the product", error.message);
     res.status(500).json({ success: false, message: "Product not updated" });

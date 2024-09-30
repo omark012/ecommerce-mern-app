@@ -9,7 +9,7 @@ const useProductStore = create((set) => ({
       return { success: false, message: "Please fill all the fields[FE]" };
     }
 
-    const res = await fetch("/api/product", {
+    const res = await fetch("/product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,13 +22,14 @@ const useProductStore = create((set) => ({
     return { success: true, message: "Product Created Successfully[FE]" };
   },
   fetchProducts: async () => {
-    const res = await fetch("/api/product");
+    const res = await fetch("/product");
     const data = await res.json();
+    console.log("data i got", data.data);
     set({ products: data.data });
   },
 
   deleteProduct: async (id) => {
-    const res = await fetch(`/api/product/${id}`, {
+    const res = await fetch(`/product/${id}`, {
       method: "DELETE",
     });
     const data = await res.json();
@@ -42,7 +43,7 @@ const useProductStore = create((set) => ({
     }
   },
   updateProduct: async (id, updatedProduct) => {
-    const res = await fetch(`/api/product/edit/${id}`, {
+    const res = await fetch(`/product/edit/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +55,7 @@ const useProductStore = create((set) => ({
       return data;
     }
 
-    //when we update the state,it immediately updates the UI without the need of refresh page
+    //when we update the state,it immediately updates the UI without the need of refresh page`
     set((prevState) => ({
       products: prevState.products.map((product) =>
         product._id === id ? data.data : product

@@ -16,7 +16,7 @@ const CreatePage = () => {
 
   const [newProduct, setNewProduct] = useState({
     name: "",
-    price: 0,
+    price: null,
     image: "",
   });
 
@@ -53,10 +53,13 @@ const CreatePage = () => {
     // Reste our local state newProduct
     setNewProduct({
       name: "",
-      price: 0,
+      price: null,
       image: "",
     });
   };
+
+  const placeholderColor = useColorModeValue("", "white");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
 
   return (
     <Container maxW={"container.sm"} marginTop={20}>
@@ -64,15 +67,19 @@ const CreatePage = () => {
         <Heading mb={7}>Create a Product</Heading>
         <Box
           w={"full"}
-          bg={useColorModeValue("white", "gray.800")}
+          bg={useColorModeValue("white", "gray.700")}
           p={6}
           rounded={"lg"}
           shadow={"md"}
+          borderWidth={1} // Add border width
+          borderColor={borderColor} // Set border color
+          borderStyle="solid" // Set border style
         >
           <VStack spacing={5}>
             <Input
               type="text"
               placeholder="Product Name"
+              _placeholder={{ color: placeholderColor }}
               value={newProduct.name}
               onChange={(e) => handleChange(e)}
               name="name"
@@ -80,6 +87,7 @@ const CreatePage = () => {
             <Input
               type="number"
               placeholder="Product Price"
+              _placeholder={{ color: placeholderColor }}
               value={newProduct.price}
               onChange={(e) => handleChange(e)}
               name="price"
@@ -87,6 +95,7 @@ const CreatePage = () => {
             <Input
               type="text"
               placeholder="Product Image Url"
+              _placeholder={{ color: placeholderColor }}
               value={newProduct.image}
               onChange={(e) => handleChange(e)}
               name="image"

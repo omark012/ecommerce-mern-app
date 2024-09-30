@@ -81,7 +81,8 @@ const ProductCard = ({ product }) => {
   };
 
   const textColor = useColorModeValue("gray.600", "gray.200");
-  const bg = useColorModeValue("white", "gray.800");
+  const bg = useColorModeValue("white", "gray.700");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
   return (
     <Box
       rounded={"lg"}
@@ -90,6 +91,9 @@ const ProductCard = ({ product }) => {
       transition={"all 0.3s"}
       _hover={{ transform: "translateY(-5px)", shadow: "xl" }}
       backgroundColor={bg}
+      borderWidth={1} // Add border width
+      borderColor={borderColor} // Set border color
+      borderStyle="solid" // Set border style
     >
       <Image
         src={product.image}
@@ -97,6 +101,8 @@ const ProductCard = ({ product }) => {
         w={"full"}
         h={48}
         objectFit={"cover"}
+        transition="0.3s"
+        _hover={{ transform: "scale(1.05)" }} // Hover effect
       />{" "}
       <Box p={5}>
         <Heading textTransform={"capitalize"} as={"h3"} size={"md"} mb={2}>
@@ -117,7 +123,7 @@ const ProductCard = ({ product }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Update your product</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={5} p={4}>
