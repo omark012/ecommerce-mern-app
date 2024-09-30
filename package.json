@@ -1,7 +1,7 @@
 {
   "name": "mern-app",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node --watch ./backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",

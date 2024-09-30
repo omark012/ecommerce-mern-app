@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(cors()); // Enable CORS if needed
 
 // middleware for product routes
-app.use("/product", productRoutes);
+
+app.use("/api/product", productRoutes);
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   //Serve static files from React app
