@@ -9,6 +9,7 @@ Welcome to the MERN E-commerce App! This application allows users to manage a pr
 - **Update Products**: Modify existing product details.
 - **Delete Products**: Remove products from the inventory.
 - **Responsive Design**: Fully responsive layout for seamless user experience on all devices.
+-  **Dark Mode**: Supports dark mode for comfortable viewing in low-light conditions.
 
 <h1 align="center">Ecommerce Screenshots 🚀</h1>
 
