@@ -1,5 +1,5 @@
- # MERN E-commerce App 
- (Screenshots Attached)
+ # MERN E-commerce App  (Screenshots Attached)
+
 
 Welcome to the MERN E-commerce App! This application allows users to manage a product inventory with functionalities to add, update, and delete products. Built using the MERN stack (MongoDB, Express.js, React.js, Node.js) and styled with Chakra UI, this app provides a sleek and modern user interface.
 
